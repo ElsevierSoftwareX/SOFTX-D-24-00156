@@ -1,0 +1,30 @@
+{
+    "is_cartesian": false,
+	
+	"CSV_columns":
+	{
+		"TAG_COLUMN":"person_id",
+		"TIME_COLUMN":"timestamp",
+		"X_COLUMN":"lat",
+		"Y_COLUMN":"lon"
+				},
+				
+	"TIMESTAMP_FORMAT":"%Y-%m-%d %H:%M:%S",
+	
+	"UNITS":
+	{
+		"DISTANCE":"m",
+		"TIME":"min"
+	},
+	
+	"_comments":["From the units below you may choose: m for meters, cm for centimenters and mm for millimeters",
+				 "s for seconds min for minutes and d for days", 
+				 "Those are the allowed units only"],
+	
+	"OUTPUT_COLUMNS":{
+		"CLASS":"cluster",
+		"TYPE":"type",
+		"DETAILS":"details"
+	}
+	
+}
