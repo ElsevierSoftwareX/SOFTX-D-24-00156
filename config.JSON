@@ -13,11 +13,10 @@
 	
 	"UNITS":
 	{
-		"DISTANCE":"m",
 		"TIME":"min"
 	},
 	
-	"_comments":["From the units below you may choose: m for meters, cm for centimenters and mm for millimeters",
+	"_comments":["From the units above you may choose:",
 				 "s for seconds min for minutes and d for days", 
 				 "Those are the allowed units only"],
 	
