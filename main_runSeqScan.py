@@ -93,12 +93,12 @@ class mainRun():
 
         trajectory = self.read_single_traj_from_csv(input_path_f)
         seqscan = SeqScan(trajectory, output_path, output_path_symbolic, silent=False, multi_mode=0)
-        seqscan.run(self.convert_distance_to_m(eps), n, self.convert_time_to_s(delta))
+        seqscan.run(eps, n, self.convert_time_to_s(delta))
         del seqscan
 
     def process_one_trajectory_of_multi(self, traj):
         seqscan = SeqScan(traj, self.output_file, self.output_file_symbolic, silent=False, multi_mode=2)
-        seqscan.run(self.convert_distance_to_m(self.eps), self.n, self.convert_time_to_s(self.delta))
+        seqscan.run(self.eps, self.n, self.convert_time_to_s(self.delta))
         del seqscan
 
     def run_ss_multi_mode(self, eps, delta, n, input_folder=None, output_folder=None, input_file=None, output_file=None,
@@ -145,7 +145,7 @@ class mainRun():
             self.read_multi_traj_from_csv(input_file)
             trajectory1 = self.list_trajectories[0]
             seqscan = SeqScan(trajectory1, self.output_file, self.output_file_symbolic, silent=False, multi_mode=1)
-            seqscan.run(self.convert_distance_to_m(eps), n, self.convert_time_to_s(delta))
+            seqscan.run(eps, n, self.convert_time_to_s(delta))
             print(trajectory1.tag_id, ' is done')
 
             if self.parallelism:
@@ -171,13 +171,6 @@ class mainRun():
                 for f in csv_input_files:
                     self.process_single_file(f)
 
-    def convert_distance_to_m(self, eps):
-        unit=DISTANCE_UNIT
-        if unit=="mm":
-            return eps*0.001
-        elif unit=="cm":
-            return eps*0.01
-        return eps
 
     def convert_time_to_s(self, delta):
         unit=TIME_UNIT
