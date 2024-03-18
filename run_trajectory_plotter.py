@@ -154,18 +154,26 @@ class RunPlotter():
 
 if __name__ == '__main__':
 
-    m= RunPlotter()
-
-    #plotter = RunPlotter()
-
-    # The input is a single file of 1 trajectory
+    plotter = RunPlotter()
+    
+    ## The input is a single file of 1 trajectory
     #input_path_file = "./input/atc_7traj/10340900.csv"
-    # The output is a single PNG of the trajectory
+    ##The output is a single PNG of the trajectory
     #output_path_file = "./output/plot_10340900.png"
+    ## Plot the trajectory using single mode
+    #plotter.plot_single_mode(input_path_file, output_path_file)
 
-    # Plot the trajectory using single mode
-    #plotter.plot_single_mode(input_path_file,
-    #                         output_path_file)
+    ## The input is a single file of many trajectories
+    #input_path_file = "./input/atc_7traj.csv"
+    ## The output is a folder of multiple PNGs
+    #output_folder = "./output/plots_folder/"
+    #plotter.plot_multi_mode(input_file=input_path_file, output_folder=output_folder,max_processors=3)
+
+    # The input is a directory of many files
+    #input_folder = "./input/atc_7traj"
+    # The output is a folder of multiple PNGs
+    #output_folder = "./output/plots_folder/"
+    #plotter.plot_multi_mode(input_folder=input_folder, output_folder=output_folder, max_processors=3)
 
 
 
