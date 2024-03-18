@@ -25,7 +25,6 @@ import json
 with open('.\config.json') as f:
     config = json.load(f)
 TAG_COLUMN=config["CSV_columns"]["TAG_COLUMN"]
-DISTANCE_UNIT = config["UNITS"]["DISTANCE"]
 TIME_UNIT = config["UNITS"]["TIME"]
 
 class StatisticsTrajectories():
