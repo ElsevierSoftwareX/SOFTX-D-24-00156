@@ -23,7 +23,6 @@ TIME_COLUMN = config["CSV_columns"]["TIME_COLUMN"]
 X_COLUMN = config["CSV_columns"]["X_COLUMN"]
 Y_COLUMN = config["CSV_columns"]["Y_COLUMN"]
 
-DISTANCE_UNIT = config["UNITS"]["DISTANCE"]
 TIME_UNIT = config["UNITS"]["TIME"]
 
 
