@@ -1,0 +1,2 @@
+person_id,mean stop duration,median stop duration,std stop duration,min stop duration,max stop duration,number stops,avg P/D
+10383900,10.5,10.5,0.5,10.0,11.0,2,1.0

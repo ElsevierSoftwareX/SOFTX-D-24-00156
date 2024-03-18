@@ -1,0 +1,2 @@
+person_id,mean step length,median step length,std step length,min step length,max step length,mean step duration,median step duration,std step duration,min step duration,max step duration,number points,total duration
+10312900,974.7003567823584,1079.9208976510745,503.2024951201176,39.20606252714331,1965.3799698607884,1.0,1.0,0.0,1.0,1.0,53,0:00:52
