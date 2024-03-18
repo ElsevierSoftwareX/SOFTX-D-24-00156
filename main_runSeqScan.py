@@ -213,4 +213,4 @@ if __name__ == '__main__':
     #output_path_f = "./output/seqscan_geolife_example.csv"
     #output_path_f_symbolic = "./output/symbolic_seqscan_geolife_example.csv"
     #8 m, 15 minutes, 30 points
-    #m.run_ss_single_mode(8, 15, 30, input_path_f, output_path_f, output_path_f_symbolic)
+    #seqscan.run_ss_single_mode(8, 15, 30, input_path_f, output_path_f, output_path_f_symbolic)
