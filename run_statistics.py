@@ -157,13 +157,20 @@ if __name__ == '__main__':
 
     stats=RunStatistics()
 
+    ##statistics in single mode
+    #input_file="./input/atc_7traj/10340900.csv"
+    #output_file = "./output/stats_10340900.csv"
+    #stats.run_statistics_single_mode(input_file, output_file)
+
+    ##statistics in bulk mode, single file as input
     #input_path_f = "./input/atc_7traj.csv"
     #output_path_f = "./output/atc_stats_7traj.csv"
     #stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f, max_processors=3)
 
-    #input_path_f = "./input/geolife_example.csv"
-    #output_path_f = "./output/geolife_stats_example.csv"
-    #m.run_statistics_single_mode(input_path_f, output_path_f)
+    ##statistics in bulk mode, folder as input
+    #input_path_folder = "./input/atc_7traj/"
+    #output_path_folder = "./output/atc_stats/"
+    #stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=3)
 
 
 
