@@ -31,7 +31,7 @@ The file to configure the values of these variables:
 - is_cartesian: true or false; true indicates that the expected spatial coordinates in input are planar, while false means that the coordintes in input are geographic.
 - The CSV_COLUMNS variables denote the fields' names in the csv files used as input. This is important for a correct parsing and interpretations of the files.
 - TIMESTAMP_FORMAT: define the timestamps format
-- UNITS: determine the DISTANCE and TIME units, to be adopted for the values of the segmentation algorithm's parameters and other functionalities.
+- UNITS: determine the TIME unit, to be adopted for the value of the segmentation algorithm's parameter (_delta_).
 - OUTPUT_COLUMNS variables denote the fields' names in the output csv files.
 
 ### input directory
@@ -225,11 +225,15 @@ Without parallelism
 ``` python
 stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
   ```
+## Citations
+Please cite the references below when using this software:
+
+1. Damiani, Maria Luisa, Fatima Hachem, Hamza Issa, Nathan Ranc, Paul Moorcroft, and Francesca Cagnacci. "Cluster-based trajectory segmentation with local noise." Data Mining and Knowledge Discovery 32 (2018): 1017-1055.
+2. Hachem, Fatima, Davide Vecchia, Maria Luisa Damiani, and Gian Pietro Picco. "Fine-grained stop-move detection in UWB-based trajectories." In 2022 IEEE International Conference on Pervasive Computing and Communications (PerCom), pp. 111-118. IEEE, 2022.
 
 ## References
-
-1- Maria Luisa Damiani, Fatima Hachem, Hamza Issa, Nathan Ranc, Paul Moorcroft, and Francesca Cagnacci. ’Cluster-based trajectory segmentation with local noise’.Data Min. Knowl. Discov. 32, no.4 (2018): 1017–1055
-2- GeoLife GPS Trajectories, https://www.microsoft.com/en-us/download/details.aspx?id=52367
-3- Brˇsˇcic, Draˇzen, Takayuki Kanda, Tetsushi Ikeda, and Takahiro Miyashita. ’Person tracking in large public spaces using 3-D range sensors’. IEEE Transactions on Human-Machine Systems 43, no. 6 (2013):522-534.
-4-Datasets from the ATC shopping center, https://dil.atr.jp/crest2010 HRI/ATC dataset/
-5- Maria Luisa Damiani, Hamza Issa, Giuseppe Fotino, Marco Heurich, and Francesca Cagnacci. ’Introducing presence and stationarity index to study partial migration patterns: an application of a spatio-temporal clustering technique’.Int. J. Geogr. Inf. Sci. 30, no.5 (2016): 907–928.
+1. Maria Luisa Damiani, Fatima Hachem, Hamza Issa, Nathan Ranc, Paul Moorcroft, and Francesca Cagnacci. ’Cluster-based trajectory segmentation with local noise’.Data Min. Knowl. Discov. 32, no.4 (2018): 1017–1055
+2. GeoLife GPS Trajectories, https://www.microsoft.com/en-us/download/details.aspx?id=52367
+3. Brˇsˇcic, Draˇzen, Takayuki Kanda, Tetsushi Ikeda, and Takahiro Miyashita. ’Person tracking in large public spaces using 3-D range sensors’. IEEE Transactions on Human-Machine Systems 43, no. 6 (2013):522-534.
+4. Datasets from the ATC shopping center, https://dil.atr.jp/crest2010 HRI/ATC dataset/
+5. Maria Luisa Damiani, Hamza Issa, Giuseppe Fotino, Marco Heurich, and Francesca Cagnacci. ’Introducing presence and stationarity index to study partial migration patterns: an application of a spatio-temporal clustering technique’.Int. J. Geogr. Inf. Sci. 30, no.5 (2016): 907–928.
