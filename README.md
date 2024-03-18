@@ -43,6 +43,8 @@ The purpose is to have examples covering both planar and geographical coordinate
 - atc_7traj: __directory__ containing 7 single files, each refers to a single person from the ATC dataset.
    
 ### output directory 
+The output directory contains files and directories representing results of the functionalities run according to the examples explained in the section below.
+It contains output of all of the 4 functionalities, for each one of them run on single mode, and bulk mode in both cases when the input is a single file of multiple entities, or a directory of multiple single files.
 
 ### Software usage
 
