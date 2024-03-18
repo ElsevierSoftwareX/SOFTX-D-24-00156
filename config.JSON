@@ -1,19 +1,19 @@
 {
-    "is_cartesian": false,
+    "is_cartesian": true,
 	
 	"CSV_columns":
 	{
 		"TAG_COLUMN":"person_id",
-		"TIME_COLUMN":"timestamp",
-		"X_COLUMN":"lat",
-		"Y_COLUMN":"lon"
+		"TIME_COLUMN":"timestamp_sec",
+		"X_COLUMN":"avg_x",
+		"Y_COLUMN":"avg_y"
 				},
 				
 	"TIMESTAMP_FORMAT":"%Y-%m-%d %H:%M:%S",
 	
 	"UNITS":
 	{
-		"TIME":"min"
+		"TIME":"s"
 	},
 	
 	"_comments":["From the units above you may choose:",
