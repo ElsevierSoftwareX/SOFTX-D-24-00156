@@ -150,14 +150,24 @@ if __name__ == '__main__':
 
     stops_stats = RunStopsStatistics()
 
-    # The input is a point classifications file obtained as a result of SeqScan
-    #input_path_f = "./output/seqscan_atc_7traj.csv"
-    # The output is a file containing the statistics over stops for every trajectory
-    #output_path_f = "./output/stats_seqscan_atc_7traj.csv"
+    ## The input is a point classifications file obtained as a result of SeqScan
 
-    # Run the statistics using the bulk mode
-    #stops_stats.run_statistics_multi_mode(input_file=input_path_f,
-    #                            output_file=output_path_f)
+    ##single mode
+    #input_file = "./output/seqscan_output/output_10340900.csv"
+    #output_file = "./output/stats_stops_output_10340900.csv"
+    #stops_stats.run_statistics_single_mode(input_file, output_file)
+
+    ## Bulk mode, input is a single point classifications file refering to multiple entities
+    #input_path_f = "./output/seqscan_atc_7traj.csv"
+    #output_path_f = "./output/stats_stops_atc_7traj.csv"
+    #stops_stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f, max_processors=4)
+
+    ## Bulk mode, input is a directory of point classifications files, each refering to a single entity 
+    #input_path_folder = "./output/seqscan_output"
+    #output_path_folder = "./output/stats_stops_atc_7traj/"
+    #stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=4)
+
+
 
 
 
