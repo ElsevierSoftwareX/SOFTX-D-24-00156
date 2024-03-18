@@ -108,7 +108,123 @@ Without parallelism:
 ```
 #### 2- Trajectory plotter
 `run_trajectory_plotter.py`: 3D trajectory plotter for visualizing the movement in spatial-temporal dimension.
+#### single mode
+```python
+   plotter = RunPlotter()
+   # The input is a single file of 1 trajectory
+   input_path_file = "./input/atc_7traj/10340900.csv"
+   #The output is a single PNG of the trajectory
+   output_path_file = "./output/plot_10340900.png"
+    #Plot the trajectory
+   plotter.plot_single_mode(input_path_file, output_path_file)
+```
+#### bulk mode:
+a) input is a single file of multiple entities:
+With parallelism
+```python
+   plotter = RunPlotter()
+   # The input is a single file of many trajectories
+   input_path_file = "./input/atc_7traj.csv"
+   # The output is a folder of multiple PNGs
+   output_folder = "./output/plots_folder/"
+   plotter.plot_multi_mode(input_file=input_path_file, output_folder=output_folder,max_processors=3)
+```
+Without parallelism
+```python
+plotter.plot_multi_mode(input_file=input_path_file, output_folder=output_folder)
+```
+b) input is a folder of separate csv files:
+With parallelism
+```python
+   # The input is a directory of many files
+   input_folder = "./input/atc_7traj"
+   # The output is a folder of multiple PNGs
+   output_folder = "./output/plots_folder/"
+   plotter.plot_multi_mode(input_folder=input_folder, output_folder=output_folder, max_processors=3)
+```
+Without Parallelism
+```python
+   plotter.plot_multi_mode(input_folder=input_folder, output_folder=output_folder)
+```
+#### 3- Statistics over the trajectory
+`run_statistics.py`. It provides statistical summaries about the trajectory’s: 
+- point count
+- total duration
+- minimum, maximum, median, average, and standard deviation of step length and duration.
+Step length is the distance between two consecutive points. Step duration is the temporal gap between them.
 
+#### single mode
+``` python
+   stats=RunStatistics()
+   #statistics in single mode
+   input_file="./input/atc_7traj/10340900.csv"
+   output_file = "./output/stats_10340900.csv"
+   stats.run_statistics_single_mode(input_file, output_file)
+```
+#### bulk mode
+a) input is a single file of multiple entities:
+With parallelism
+``` python
+   #statistics in bulk mode, single file as input
+   input_path_f = "./input/atc_7traj.csv"
+   output_path_f = "./output/atc_stats_7traj.csv"
+   stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f, max_processors=3)
+```
+Without parallelism
+``` python
+   stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f)
+```
+
+b) input is a folder of separate csv files:
+With parallelism
+``` python
+   #statistics in bulk mode, folder as input
+   input_path_folder = "./input/atc_7traj/"
+   output_path_folder = "./output/atc_stats/"
+   stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=3)
+```
+Without parallelism
+``` python
+   stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
+```
+
+#### 4- Statistics over the symbolic trajectories
+`run_statistics_on_stops.py`. It provides statistics over the stops, results of SeqScan. More specifically it operates over the point classification file. The statistics include:
+- The number of stops 
+- minimum, maximum, median, average, and standard deviation of their duration.
+- average presence/duration (P/D) of the stops. It is a value in ]0,1] to quanitify the quality of the stops. For details please refere to [5]
+
+#### single mode
+``` python
+   # The input is a point classifications file obtained as a result of SeqScan
+   input_file = "./output/seqscan_output/output_10340900.csv"
+   output_file = "./output/stats_stops_output_10340900.csv"
+   stops_stats.run_statistics_single_mode(input_file, output_file)
+   ```
+#### bulk mode
+a) input is a single file of multiple entities:
+With parallelism
+``` python
+   input_path_f = "./output/seqscan_atc_7traj.csv"
+   output_path_f = "./output/stats_stops_atc_7traj.csv"
+   stops_stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f, max_processors=4)
+```
+Without parallelism
+``` python
+   stops_stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f)
+```
+
+b) input is a folder of separate csv files:
+With parallelism
+``` python
+   input_path_folder = "./output/seqscan_output"
+   output_path_folder = "./output/stats_stops_atc_7traj/"
+   stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder,max_processors=4)
+```
+Without parallelism
+``` python
+stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
+  ```
 
 ## References
 
@@ -116,3 +232,4 @@ Without parallelism:
 2- GeoLife GPS Trajectories, https://www.microsoft.com/en-us/download/details.aspx?id=52367
 3- Brˇsˇcic, Draˇzen, Takayuki Kanda, Tetsushi Ikeda, and Takahiro Miyashita. ’Person tracking in large public spaces using 3-D range sensors’. IEEE Transactions on Human-Machine Systems 43, no. 6 (2013):522-534.
 4-Datasets from the ATC shopping center, https://dil.atr.jp/crest2010 HRI/ATC dataset/
+5- Maria Luisa Damiani, Hamza Issa, Giuseppe Fotino, Marco Heurich, and Francesca Cagnacci. ’Introducing presence and stationarity index to study partial migration patterns: an application of a spatio-temporal clustering technique’.Int. J. Geogr. Inf. Sci. 30, no.5 (2016): 907–928.
