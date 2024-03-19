@@ -372,7 +372,7 @@ class SeqScan():
         if writing_mode==0 or writing_mode==1:
             with open(path, "w", newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow(["tag_id","stop_id", "start_time", "end_time"])  # Write header
+                writer.writerow([TAG_COLUMN,"stop_id", "start_time", "end_time"])  # Write header
                 i=1
                 for cluster in self.clusters:
                     writer.writerow([self.trajectory.tag_id, "STOP_"+str(i),cluster.first_timestamp(), cluster.last_timestamp()])
