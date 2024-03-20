@@ -4,7 +4,9 @@ A framework for scalable and noise-resistant stop-move segmentation of large dat
 
 
 Stop@, also known as StopAt, focuses on behavior analysis by offering a framework specifically designed to extract stop-move patterns from spatial trajectories.This framework addresses mobility data from both indoor and outdoor environments.
-Built around a stop detection method (SeqScan), it efficiently segments trajectories into stop and move segments. 
+Built around a stop detection method (SeqScan), it efficiently segments trajectories into stop and move segments.
+It is successfully used in diverse applications in animal ecology [1] and it has been recently validated against
+accurate ground truth stops collected in a museum, proving to be effective and robust, also for the sudy of human mobility [2].
 Additionally, Stop@ provides a set of functionalities for pre-segmenation data analysis, and for analyzing the segmentation results.
 
 Stop@ also implements parallel processing capabilities for handling large datasets of trajectories.
@@ -46,10 +48,10 @@ The purpose is to have examples covering both planar and geographical coordinate
 Here is the description for the datasets:
 
 - geolife_example.csv: dataset for a __single__ person moving in the city of Beijing, China, in __outdoor__ settings.
-  This dataset has been taken from the Microsoft geoLife website[2] (trajectory of user 005 on the day 24/10/2008 (20081024041230)).
+  This dataset has been taken from the Microsoft geoLife website[3] (trajectory of user 005 on the day 24/10/2008 (20081024041230)).
   When working with this example, you need to modify the content of the config file accordingly (especially the *INPUT_COLUMNS*, and the *is_cartesian* has to be set to _false_)
   
-- atc_7traj.csv: a single file representing dataset for __multiple__ persons (seven) moving in an __indoor__ place (ATC shopping center in Japan).This dataset sample has been taken from [4], and for more details about the data collection and characteristics, you can check [3].
+- atc_7traj.csv: a single file representing dataset for __multiple__ persons (seven) moving in an __indoor__ place (ATC shopping center in Japan).This dataset sample has been taken from [5], and for more details about the data collection and characteristics, you can check [4].
 In the config file, *is_cartesian* should be set to *true* and the *INPUT_COLUMNS* need to fit the fields' names of the file.
 - atc_7traj: __directory__ containing 7 individual files, each representing the movement of a single person from the ATC dataset.
    
@@ -205,7 +207,7 @@ Without parallelism
 `run_statistics_on_stops.py`. It provides statistics over the stops, results of SeqScan. More specifically it operates over the point classification file. The statistics include:
 - The number of stops 
 - minimum, maximum, median, average, and standard deviation of their duration.
-- average presence/duration (P/D) of the stops. It is a value in ]0,1] to quantify the quality of the stops. For details please refere to [5]
+- average presence/duration (P/D) of the stops. It is a value in ]0,1] to quantify the quality of the stops. For details please refere to [6]
 
 #### single mode
 ``` python
@@ -246,7 +248,8 @@ Please cite the references below when using this software:
 
 ## References
 1. Maria Luisa Damiani, Fatima Hachem, Hamza Issa, Nathan Ranc, Paul Moorcroft, and Francesca Cagnacci. ’Cluster-based trajectory segmentation with local noise’.Data Min. Knowl. Discov. 32, no.4 (2018): 1017–1055
-2. GeoLife GPS Trajectories, https://www.microsoft.com/en-us/download/details.aspx?id=52367
-3. Brˇsˇcic, Draˇzen, Takayuki Kanda, Tetsushi Ikeda, and Takahiro Miyashita. ’Person tracking in large public spaces using 3-D range sensors’. IEEE Transactions on Human-Machine Systems 43, no. 6 (2013):522-534.
-4. Datasets from the ATC shopping center, https://dil.atr.jp/crest2010 HRI/ATC dataset/
-5. Maria Luisa Damiani, Hamza Issa, Giuseppe Fotino, Marco Heurich, and Francesca Cagnacci. ’Introducing presence and stationarity index to study partial migration patterns: an application of a spatio-temporal clustering technique’.Int. J. Geogr. Inf. Sci. 30, no.5 (2016): 907–928.
+2. Fatima Hachem, Davide Vecchia, Maria Luisa Damiani, and Gian Pietro Picco. ’Fine-grained Stop-Move Detection in UWB-based Trajectories’.In IEEE International Conference on Pervasive Computing and Communications, PerCom 2022, Pisa, Italy, March 21-25, 2022 (pp. 111–118). IEEE, 2022.
+3. GeoLife GPS Trajectories, https://www.microsoft.com/en-us/download/details.aspx?id=52367
+4. Brˇsˇcic, Draˇzen, Takayuki Kanda, Tetsushi Ikeda, and Takahiro Miyashita. ’Person tracking in large public spaces using 3-D range sensors’. IEEE Transactions on Human-Machine Systems 43, no. 6 (2013):522-534.
+5. Datasets from the ATC shopping center, https://dil.atr.jp/crest2010 HRI/ATC dataset/
+6. Maria Luisa Damiani, Hamza Issa, Giuseppe Fotino, Marco Heurich, and Francesca Cagnacci. ’Introducing presence and stationarity index to study partial migration patterns: an application of a spatio-temporal clustering technique’.Int. J. Geogr. Inf. Sci. 30, no.5 (2016): 907–928.
