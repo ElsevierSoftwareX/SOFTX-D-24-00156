@@ -9,7 +9,6 @@ from tools.plot_trajectories import PlotTrajectories
 
 from seqscan.data.trajectory import Trajectory
 from seqscan.data.point import Point
-from seqscan.seqscan import SeqScan
 
 from datetime import datetime
 
