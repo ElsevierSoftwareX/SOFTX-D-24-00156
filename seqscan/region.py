@@ -246,6 +246,23 @@ class Region(object):
         """
         return start < self.time.segment[0].t_start
 
+    def compute_centroid(self):
+        if not self.points or len(self.points)==0:
+            return None  # No points in the region
+
+        total_lat = 0
+        total_lon = 0
+        count = len(self.points)
+
+        for point in self.points:
+            total_lat += point.geometry.lat
+            total_lon += point.geometry.lon
+
+        average_lat = total_lat / count
+        average_lon = total_lon / count
+
+        return (average_lat, average_lon)
+
 
 # leaves of the region tree structure
 class LeafRegion(Region):
