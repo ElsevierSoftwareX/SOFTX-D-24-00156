@@ -44,6 +44,7 @@ import json
 with open('./config.json') as f:
     config = json.load(f)
 TAG_COLUMN = config["CSV_columns"]["TAG_COLUMN"]
+CARTESIAN= config["is_cartesian"]
 
 # Constants and helpers
 EXCURSION='Excursion'
@@ -372,10 +373,16 @@ class SeqScan():
         if writing_mode==0 or writing_mode==1:
             with open(path, "w", newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([TAG_COLUMN,"stop_id", "start_time", "end_time"])  # Write header
+                if CARTESIAN:
+                    writer.writerow([TAG_COLUMN,"stop_id", "start_time", "end_time", "centroid_x", "centroid_y"])  # Write header
+                else:
+                    writer.writerow([TAG_COLUMN, "stop_id", "start_time", "end_time", "centroid_lat", "centroid_lon"])  # Write header
                 i=1
                 for cluster in self.clusters:
-                    writer.writerow([self.trajectory.tag_id, "STOP_"+str(i),cluster.first_timestamp(), cluster.last_timestamp()])
+                    c=cluster.compute_centroid()
+                    writer.writerow([self.trajectory.tag_id, "STOP_"+str(i),
+                                     cluster.first_timestamp(), cluster.last_timestamp(),
+                                     c[0], c[1]])
                     i+=1
 
         elif writing_mode==2:
@@ -383,8 +390,11 @@ class SeqScan():
                 writer = csv.writer(f)
                 i = 1
                 for cluster in self.clusters:
+                    c = cluster.compute_centroid()
                     writer.writerow(
-                        [self.trajectory.tag_id, "STOP_" + str(i), cluster.first_timestamp(), cluster.last_timestamp()])
+                        [self.trajectory.tag_id, "STOP_" + str(i),
+                         cluster.first_timestamp(), cluster.last_timestamp(),
+                         c[0], c[1]])
                     i += 1
 
 
