@@ -24,6 +24,16 @@
 		"CLASS":"cluster",
 		"TYPE":"type",
 		"DETAILS":"details"
+	},
+
+	"OUTPUT_STOPS_COLUMNS": {
+		"STOP_LABEL": "stop_id",
+		"START":"start_time",
+		"END": "end_time",
+		"CARTESIAN_CENTROID_X": "centroid_x",
+		"CARTESIAN_CENTROID_Y": "centroid_y",
+		"CENTROID_LAT": "centroid_lat",
+		"CENTROID_LON": "centroid_lon"
 	}
 	
 }
