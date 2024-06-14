@@ -347,6 +347,7 @@ With parallelism
 Without Parallelism
 ```python
    stops_plots.plot_symbolic_multi_mode(input_folder=input_folder, output_folder=output_folder)
+```
 
 ## Citations
 Please cite the references below when using this software:
