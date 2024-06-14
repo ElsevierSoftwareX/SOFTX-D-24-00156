@@ -33,6 +33,10 @@ class PlotTrajectories():
         self.multi_mode = multi_mode
         self.is_cartesian = trajectory.is_cartesian
 
+        output_directory = os.path.dirname(self.output_path)
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
     def load_datapoints(self, trajectory, cartesian):
         dataset = []
         for p in trajectory:
