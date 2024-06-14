@@ -26,6 +26,7 @@ Y_COLUMN = config["CSV_columns"]["Y_COLUMN"]
 TIME_UNIT = config["UNITS"]["TIME"]
 
 
+
 class mainRun():
 
     def read_multi_traj_from_csv(self, path):
@@ -185,24 +186,27 @@ class mainRun():
 if __name__ == '__main__':
     seqscan = mainRun()
 
+    ##The input is a single trajectory, GeoLife example
+    #input_path_f = "./input/geolife_example.csv"
+    #output_path_f = "./output/seqscan_geolife_example.csv"
+    #output_path_f_symbolic = "./output/symbolic_seqscan_geolife_example.csv"
+    ##8 m, 15 minutes, 30 points
+    #seqscan.run_ss_single_mode(8, 15, 30, input_path_f, output_path_f, output_path_f_symbolic)
+
+    ##The input is a single csv file of multiple trajectories, ATC example
+    ##Remember to set the config files parameters accordingly
     #input_path_f = "./input/atc_7traj.csv"
     #output_path_f = "./output/seqscan_atc_7traj.csv"
-    #seqscan.run_ss_multi_mode(1000, 10, 5, input_file=input_path_f, output_file=output_path_f, max_processors=3)
+    #seqscan.run_ss_multi_mode(1000, 10, 5, input_file=input_path_f, output_file=output_path_f, max_processors=1)
 
     ## The input is a folder of 7 separate csv files
     #input_path_folder = "./input/atc_7traj/"
     ## The output path is for a folder where the points classification files
     ## are going to be saved, and the folder of symbolic trajectories too
     #output_path_folder = "./output/seqscan_output/"
-
     ## Run Seqscan, using bulk mode, with 10 processors in parallel
     #seqscan.run_ss_multi_mode(1000, 10, 5,  # Seqscan parameters
     #                          input_folder=input_path_folder,
     #                          output_folder=output_path_folder,
-    #                          max_processors=10)
+    #                          max_processors= 10)
 
-    #input_path_f = "./input/geolife_example.csv"
-    #output_path_f = "./output/seqscan_geolife_example.csv"
-    #output_path_f_symbolic = "./output/symbolic_seqscan_geolife_example.csv"
-    #8 m, 15 minutes, 30 points
-    #seqscan.run_ss_single_mode(8, 15, 30, input_path_f, output_path_f, output_path_f_symbolic)
