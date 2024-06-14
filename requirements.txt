@@ -4,3 +4,5 @@ multiprocessing
 statistics
 numpy
 utm
+geopandas
+contextily
