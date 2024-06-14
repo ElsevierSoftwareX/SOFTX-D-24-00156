@@ -75,7 +75,7 @@ The point classification file maintains a structure similar to the input file, b
 2- an excursion point
 3- belonging to a "move" segment
 4- a noise point   
-The second file represents the symbolic trajectory, consisting of a sequence of the extracted stops. Each stop is represented by its ID, start and end time.
+The second file represents the symbolic trajectory, consisting of a sequence of the extracted stops. Each stop is represented by its ID, start and end times and its centroid coordinates.
 
 #### Single mode:
 ```python
@@ -240,6 +240,53 @@ Without parallelism
 ``` python
 stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
   ```
+#### 5- Statistics over the "Move" parts
+`run_statistics_on_moves.py`. It provides statistics over the move parts of the results of SeqScan. More specifically it operates over the point classification file. Since we can perceive the “Move” as individual points as well as trajectory segments, the statistics cover both. They include (for every symbolic trajectory): 
+- number of Moving points
+- number of Moving parts(segments)
+- and the min, max, mean, std and median of:
+  - step length
+  - step duration
+  - speed
+  - move part duration
+  - radius of gyration
+
+``` python
+   moves_stats = RunMovesStatistics()
+ ```
+
+#### single mode
+``` python
+   # The input is a point classifications file obtained as a result of SeqScan
+   input_file = "./output/seqscan_output/output_10340900.csv"
+   output_file = "./output/stats_moves_output_10340900.csv"
+   moves_stats.run_statistics_single_mode(input_file, output_file)
+   ```
+#### bulk mode
+a) input is a single file of multiple entities:
+With parallelism
+``` python
+   input_path_f = "./output/seqscan_atc_7traj.csv"
+   output_path_f = "./output/stats_moves_atc_7traj.csv"
+   moves_stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f, max_processors=4)
+```
+Without parallelism
+``` python
+   moves_stats.run_statistics_multi_mode(input_file=input_path_f, output_file=output_path_f)
+```
+
+b) input is a folder of separate csv files:
+With parallelism
+``` python
+   input_path_folder = "./output/seqscan_output"
+   output_path_folder = "./output/stats_moves_atc_7traj/"
+   moves_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=4)
+```
+Without parallelism
+``` python
+moves_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
+  ```
+
 ## Citations
 Please cite the references below when using this software:
 
