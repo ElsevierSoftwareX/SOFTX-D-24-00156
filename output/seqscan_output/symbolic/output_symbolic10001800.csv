@@ -1,2 +1,2 @@
-tag_id,stop_id,start_time,end_time
-10001800,STOP_1,2013-01-09 03:00:42,2013-01-09 03:00:53
+person_id,stop_id,start_time,end_time,centroid_x,centroid_y
+10001800,STOP_1,2013-01-09 03:00:42,2013-01-09 03:00:53,-30812.768077601406,-2703.1018518518513
