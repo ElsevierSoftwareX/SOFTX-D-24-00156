@@ -40,6 +40,7 @@ The configuration file allows users to adjust the values of the following variab
 - TIMESTAMP_FORMAT: defines the timestamps format
 - UNITS: determines the TIME unit, to be adopted for the value of the segmentation algorithm's parameter (_delta_).
 - OUTPUT_COLUMNS: denote the fields' names in the output csv files.
+- OUTPUT_STOPS_COLUMNS: denote the fields' names in the output csv file of symbolic trajectories.
 
 ### input directory
 The input directory contains mobility data that serves as examples for the functionalities.
@@ -77,9 +78,11 @@ The point classification file maintains a structure similar to the input file, b
 4- a noise point   
 The second file represents the symbolic trajectory, consisting of a sequence of the extracted stops. Each stop is represented by its ID, start and end times and its centroid coordinates.
 
-#### Single mode:
 ```python
   seqscan = mainRun()
+```
+#### Single mode:
+```python
   input_path_f = "./input/geolife_example.csv"
   output_path_f = "./output/seqscan_geolife_example.csv"
   output_path_f_symbolic = "./output/symbolic_seqscan_geolife_example.csv"
@@ -90,8 +93,6 @@ The second file represents the symbolic trajectory, consisting of a sequence of 
 a) input is a single file of multiple entities:
 With parallelism:
 ```python
-  seqscan = mainRun()
-
   input_path_f = "./input/atc_7traj.csv"
   output_path_f = "./output/seqscan_atc_7traj.csv"
   #params: 1000 mm, 10 sec, 5 points
@@ -123,9 +124,12 @@ Without parallelism:
 ```
 #### 2- Trajectory plotter
 `run_trajectory_plotter.py`: 3D trajectory plotter for visualizing the movement in spatial-temporal dimension.
-#### single mode
+
 ```python
    plotter = RunPlotter()
+```
+#### single mode
+```python
    # The input is a single file of 1 trajectory
    input_path_file = "./input/atc_7traj/10340900.csv"
    #The output is a single PNG of the trajectory
@@ -137,7 +141,6 @@ Without parallelism:
 a) input is a single file of multiple entities:
 With parallelism
 ```python
-   plotter = RunPlotter()
    # The input is a single file of many trajectories
    input_path_file = "./input/atc_7traj.csv"
    # The output is a folder of multiple PNGs
@@ -168,9 +171,11 @@ Without Parallelism
 - minimum, maximum, median, average, and standard deviation of step length and duration.
 Step length is the distance between two consecutive points. Step duration is the temporal gap between them.
 
-#### single mode
 ``` python
    stats=RunStatistics()
+```
+#### single mode
+``` python
    #statistics in single mode
    input_file="./input/atc_7traj/10340900.csv"
    output_file = "./output/stats_10340900.csv"
@@ -209,6 +214,9 @@ Without parallelism
 - minimum, maximum, median, average, and standard deviation of their duration.
 - average presence/duration (P/D) of the stops. It is a value in ]0,1] to quantify the quality of the stops. For details please refere to [6]
 
+``` python
+   stops_stats = RunStopsStatistics()
+```
 #### single mode
 ``` python
    # The input is a point classifications file obtained as a result of SeqScan
@@ -286,6 +294,59 @@ Without parallelism
 ``` python
 moves_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder)
   ```
+#### 2- Symbolic Trajectory plotter
+`run_symbolic_plotter.py`: This tool visualizes stops using their centroid coordinates within the spatial context of each trajectory.
+The plotter distinguishes between cases where Cartesian data is utilized and where it is not. In the latter case, the map background corresponds to the “open street map” where stop points are plotted accordingly. Conversely, when Cartesian data is employed, the points are plotted directly within the spatial coordinates without a background map. Additionally, stop points are represented in disk shapes, where the size of each disk is proportional to the duration of the corresponding stop. 
+
+```python
+   stops_plots = RunSymbolicPlotter()
+```
+
+#### single mode
+```python
+   # The input is a single file of 1 symbolic trajectory- ATC example
+   input_path_file = "./output/seqscan_output/symbolic/output_symbolic10340900.csv"
+   #The output is a single PNG of the symbolic trajectory
+   output_path_file = "./output/plot_stops_10340900.png"
+    #Plot the stops
+   stops_plots.plot_symbolic_single_mode(input_path_file, output_path_file)
+```
+
+```python
+   # The input is a single file of 1 symbolic trajectory- GeoLife example
+   #Please remember to adjust the Config.JSON accordingly
+   input_path_file = "./output/symbolic_seqscan_geolife_example.csv"
+   #The output is a single PNG of the symbolic trajectory
+   output_path_file = "./output/plot_stops_geolife.png"
+    #Plot the stops
+   stops_plots.plot_symbolic_single_mode(input_path_file, output_path_file)
+```
+#### bulk mode:
+a) input is a single file of multiple entities:
+With parallelism
+```python
+   # The input is a single file of many symbolic trajectories
+   input_path_file = "./output/symbolic_seqscan_atc_7traj.csv"
+   # The output is a folder of multiple PNGs
+   output_folder = "./output/plots_stops_folder/"
+   stops_plots.plot_symbolic_multi_mode(input_file=input_path_file, output_folder=output_folder,max_processors=3)
+```
+Without parallelism
+```python
+stops_plots.plot_symbolic_multi_mode(input_file=input_path_file, output_folder=output_folder)
+```
+b) input is a folder of separate csv files:
+With parallelism
+```python
+   # The input is a directory of many files
+   input_folder = "./output/seqscan_output/symbolic"
+   # The output is a folder of multiple PNGs
+   output_folder = "./output/plots_stops_folder/"
+   stops_plots.plot_symbolic_multi_mode(input_folder=input_folder, output_folder=output_folder, max_processors=3)
+```
+Without Parallelism
+```python
+   stops_plots.plot_symbolic_multi_mode(input_folder=input_folder, output_folder=output_folder)
 
 ## Citations
 Please cite the references below when using this software:
