@@ -26,6 +26,7 @@ import numpy
 import sys
 import math
 import time
+import logging
 
 from datetime import datetime, timedelta
 from collections import defaultdict, OrderedDict
@@ -45,6 +46,17 @@ with open('./config.json') as f:
     config = json.load(f)
 TAG_COLUMN = config["CSV_columns"]["TAG_COLUMN"]
 CARTESIAN= config["is_cartesian"]
+STOP_ID_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["STOP_LABEL"]
+START_TIME_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["START"]
+END_TIME_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["END"]
+
+CENTROID_X_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["CARTESIAN_CENTROID_X"]
+CENTROID_Y_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["CARTESIAN_CENTROID_Y"]
+CENTROID_LAT_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["CENTROID_LAT"]
+CENTROID_LON_COLUMN = config["OUTPUT_STOPS_COLUMNS"]["CENTROID_LON"]
+
+
+
 
 # Constants and helpers
 EXCURSION='Excursion'
@@ -54,6 +66,12 @@ NOISE='Noise'
 
 MOVE_LABEL = "MOVE"
 STOP_LABEL = "STOP"
+
+#logging.basicConfig(
+#    filename='execution_time.log',
+#    level=logging.INFO,
+#    format='%(asctime)s - %(levelname)s - %(message)s'
+#)
     
 class SeqScan():
     """Implementation of the SEQSCAN algorithm."""
@@ -142,6 +160,7 @@ class SeqScan():
     def run(self, distance, n_points, presence):
         """Excecutes the SEQSCAN clustering algorithm on a single object.
         """
+        run_start_time = time.time()
         self.dataset = self.load_datapoints(self.trajectory, self.is_cartesian)
         progressInd = 0
         self.featuresCount = len(self.dataset)
@@ -246,6 +265,10 @@ class SeqScan():
                 progressInd +=1
                 self.update_progress((progressInd/self.featuresCount)*100)
 
+            run_end_time = time.time()
+            execution_time = run_end_time - run_start_time
+            #logging.info(f",{self.trajectory.tag_id},{len(self.trajectory)},{execution_time:.6f}")
+            #print(f"{self.trajectory.tag_id}: Function executed in {execution_time:.6f} seconds")
             # unfinished business
             self.add_cluster(active_cluster)
             self._analyze(self.dataset)
@@ -374,11 +397,15 @@ class SeqScan():
             with open(path, "w", newline='') as f:
                 writer = csv.writer(f)
                 if CARTESIAN:
-                    writer.writerow([TAG_COLUMN,"stop_id", "start_time", "end_time", "centroid_x", "centroid_y"])  # Write header
+                    writer.writerow([TAG_COLUMN,STOP_ID_COLUMN, START_TIME_COLUMN, END_TIME_COLUMN,
+                                     CENTROID_X_COLUMN, CENTROID_Y_COLUMN])  # Write header
                 else:
-                    writer.writerow([TAG_COLUMN, "stop_id", "start_time", "end_time", "centroid_lat", "centroid_lon"])  # Write header
+                    writer.writerow([TAG_COLUMN, STOP_ID_COLUMN, START_TIME_COLUMN, END_TIME_COLUMN,
+                                     CENTROID_LAT_COLUMN, CENTROID_LON_COLUMN])  # Write header
+
                 i=1
-                for cluster in self.clusters:
+                clusters_list=sorted(self.clusters, key=lambda cluster: cluster.first_timestamp())
+                for cluster in clusters_list:
                     c=cluster.compute_centroid()
                     writer.writerow([self.trajectory.tag_id, "STOP_"+str(i),
                                      cluster.first_timestamp(), cluster.last_timestamp(),
@@ -389,7 +416,8 @@ class SeqScan():
             with open(path, "a", newline='') as f:
                 writer = csv.writer(f)
                 i = 1
-                for cluster in self.clusters:
+                clusters_list = sorted(self.clusters, key=lambda cluster: cluster.first_timestamp())
+                for cluster in clusters_list:
                     c = cluster.compute_centroid()
                     writer.writerow(
                         [self.trajectory.tag_id, "STOP_" + str(i),
