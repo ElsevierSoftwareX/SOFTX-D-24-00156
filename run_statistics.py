@@ -171,7 +171,3 @@ if __name__ == '__main__':
     #input_path_folder = "./input/atc_7traj/"
     #output_path_folder = "./output/atc_stats/"
     #stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=3)
-
-
-
-
