@@ -173,6 +173,3 @@ if __name__ == '__main__':
     # The output is a folder of multiple PNGs
     #output_folder = "./output/plots_folder/"
     #plotter.plot_multi_mode(input_folder=input_folder, output_folder=output_folder, max_processors=3)
-
-
-
