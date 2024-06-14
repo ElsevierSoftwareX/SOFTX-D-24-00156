@@ -43,6 +43,10 @@ class StatisticsTrajectories():
 
         self.stats_results= StatResult()
 
+        output_directory = os.path.dirname(self.output_path)
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
     def load_datapoints(self, trajectory, cartesian):
         dataset = []
         for p in trajectory:
