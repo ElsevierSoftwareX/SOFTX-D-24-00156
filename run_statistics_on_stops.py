@@ -166,12 +166,3 @@ if __name__ == '__main__':
     #input_path_folder = "./output/seqscan_output"
     #output_path_folder = "./output/stats_stops_atc_7traj/"
     #stops_stats.run_statistics_multi_mode(input_folder=input_path_folder, output_folder=output_path_folder, max_processors=4)
-
-
-
-
-
-
-
-
-
