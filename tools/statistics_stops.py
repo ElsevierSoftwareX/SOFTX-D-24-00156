@@ -1,4 +1,3 @@
-
 # Standard modules
 import os
 import numpy
@@ -13,12 +12,6 @@ from collections import defaultdict, OrderedDict
 
 # my modules
 print (os.getcwd())
-from seqscan.point import Point
-from seqscan.feature import Feature
-from seqscan.feature_point import FeaturePoint
-
-from seqscan.data.trajectory import Trajectory
-from seqscan.data.point import Point as TrajectoryPoint
 from seqscan.data.stop_point import Stop_Point
 import csv
 import json
@@ -48,6 +41,10 @@ class StatisticsStops():
         self.tag_id=tag_id
 
         self.stats_results= StatResult()
+
+        output_directory = os.path.dirname(self.output_path)
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
 
 
 
